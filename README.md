@@ -77,8 +77,6 @@ cd lttr/tools
 python train.py --cfg_file $model_config_path
 ```
 
-*By default, we use a single Nvidia RTX 3090 for training.*
-
 For training with ddp, you can execute the following command ( ensure be root dir ):
 
 ```bash

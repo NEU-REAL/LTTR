@@ -273,9 +273,9 @@ class CenterHeadTemplate(nn.Module):
 
     @torch.no_grad()
     def generate_val_box(self, batch_dict):
-        xy_preds = batch_dict['xy_preds'] # res_x, res_y, z, sinry, cosry
-        z_preds = batch_dict['z_preds'] # res_x, res_y, z, sinry, cosry
-        ry_preds = batch_dict['ry_preds'] # res_x, res_y, z, sinry, cosry
+        xy_preds = batch_dict['xy_preds']
+        z_preds = batch_dict['z_preds']
+        ry_preds = batch_dict['ry_preds']
         cls_preds = batch_dict['cls_preds'].permute(0,3,1,2)
         whl = batch_dict['object_dim'] # B, 3
         batch_size = whl.shape[0]
