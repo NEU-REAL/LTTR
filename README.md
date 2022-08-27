@@ -101,7 +101,7 @@ The evaluation results are saved to the same path as the model, such as 'output/
 ## Acknowledgment
 
 - This repo is built upon [P2B](https://github.com/HaozheQi/P2B) and [OpenPCDet](https://github.com/open-mmlab/OpenPCDet). 
-
+- Thank [lucidrains](https://github.com/lucidrains) for his implementation of [TNT](https://github.com/lucidrains/transformer-in-transformer). 
 ## Citation
 
 If you find the project useful for your research, you may cite,
