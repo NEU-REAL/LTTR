@@ -36,10 +36,11 @@ The pretrained model could be downloaded at this [Link](https://drive.google.com
    ```bash
    conda create -n lttr python=3.8 -y
    conda activate lttr
-   conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cudatoolkit=10.2 -c pytorch
+   
+   pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
    
    # please refer to https://github.com/traveller59/spconv
-   pip install spconv-cu102
+   pip install spconv-cu111
 
    git clone https://github.com/3bobo/lttr
    cd lttr/
@@ -100,6 +101,8 @@ The evaluation results are saved to the same path as the model, such as 'output/
 
 - This repo is built upon [P2B](https://github.com/HaozheQi/P2B) and [OpenPCDet](https://github.com/open-mmlab/OpenPCDet). 
 - Thank [lucidrains](https://github.com/lucidrains) for his implementation of [TNT](https://github.com/lucidrains/transformer-in-transformer). 
+- Thank [traveller59](https://github.com/traveller59) for his implementation of [Spconv](https://github.com/traveller59/spconv).
+- Thank [tianweiy](https://github.com/tianweiy) for his implementation of [CenterPoint](https://github.com/tianweiy/CenterPoint).
 ## Citation
 
 If you find the project useful for your research, you may cite,
