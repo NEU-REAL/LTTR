@@ -28,6 +28,7 @@ Here, we show the latest performance of our LTTR. In order to better open source
 | Success   | 68.6 | 45.5 | 39.5 | 70.7     | 56.1  |
 | Precision | 79.2 | 70.6 | 45.2 | 90.6     | 72.7  |
 
+The pretrained model could be downloaded at this [Link](https://drive.google.com/drive/folders/1eQN0V3I87VOUkAS5TB373ywTXZH00ALl?usp=sharing)
 ## Setup
 
 ### Installation
