@@ -1,0 +1,102 @@
+CLASS_NAMES: ['Van']
+
+DATA_CONFIG:
+    _BASE_CONFIG_: cfgs/dataset_configs/kittisot_dataset.yaml
+    POINT_CLOUD_RANGE: [-3.6, -3.6, -3, 3.6, 3.6, 1]
+                
+    DATA_PROCESSOR:
+        - NAME: shuffle_points
+          SHUFFLE_ENABLED: {
+                'train': True,
+                'test': False
+          }
+
+        - NAME: transform_points_to_voxels
+          VOXEL_SIZE: [0.05, 0.05, 0.1]
+          MAX_POINTS_PER_VOXEL: 5
+          MAX_NUMBER_OF_VOXELS: {
+            'train': 1024,
+            'test': 1024
+          }
+
+MODEL:
+    NAME: Baseline
+
+    VFE:
+        NAME: MeanVFE
+
+    BACKBONE_3D:
+        NAME: VoxelBackBone8x
+
+    MAP_TO_BEV:
+        NAME: HeightCompression
+        NUM_BEV_FEATURES: 256
+
+    BACKBONE_2D:
+        NAME: BaseBEVBackbone
+
+        LAYER_NUMS: [5, 5]
+        LAYER_STRIDES: [1, 2]
+        NUM_FILTERS: [256, 256]
+        UPSAMPLE_STRIDES: [1, 2]
+        NUM_UPSAMPLE_FILTERS: [256, 256]
+
+    NECK:
+        NAME: RegionFusion
+        TRANSFORMER_CONFIG:
+            TRANS_MODE: Base
+            IMAGE_DIM: 512
+            IMAGE_SIZE: 18
+
+            PATCH_DIM: 128
+            PATCH_SIZE: 9
+            PIXEL_DIM: 64
+            PIXEL_SIZE: 3
+
+            DEPTH: 1
+            HEADS: 8
+            DIM_HEADS: 128
+            OUT_DIM: 256
+
+        SIMILAIRY_COFIG:
+            MODE: DepthWise
+            INPUT: 512
+            OUTPUT: 512
+
+    REG_HEAD:
+        NAME: CenterHead
+        MAX_NUM: 50
+        
+        ASSIGN_RADIUS: 1
+        CLS_FC: [128, 128, 128, 1]
+        XY_FC: [128, 128, 128, 2]
+        Z_FC: [128, 128, 128, 1]
+        RY_FC: [128, 128, 128, 2]
+
+        LOSS_CONFIG:
+            LOSS_CLS: FocalLoss
+            LOSS_REG: L1
+            CLS_WEIGHTS: 1.0
+            REG_WEIGHTS: [1.0, 1.0, 1.5, 1.0, 1.0]
+
+
+OPTIMIZATION:
+    BATCH_SIZE_PER_GPU: 36
+    NUM_EPOCHS: 80
+
+    OPTIMIZER: adam_onecycle
+    LR: 0.003
+    WEIGHT_DECAY: 0.01
+    MOMENTUM: 0.9
+
+    MOMS: [0.95, 0.85]
+    PCT_START: 0.4
+    DIV_FACTOR: 10
+    DECAY_STEP_LIST: [35, 45]
+    LR_DECAY: 0.1
+    LR_CLIP: 0.0000001
+
+    LR_WARMUP: False
+    WARMUP_EPOCH: 1
+
+    GRAD_NORM_CLIP: 10

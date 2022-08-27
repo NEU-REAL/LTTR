@@ -1,0 +1,53 @@
+DATASET: 'KittiSOT'
+DATA_PATH: '../data/kitti/training'
+
+POINT_CLOUD_RANGE: [-3.2, -3.2, -2, 3.2, 3.2, 2]
+
+DATA_SPLIT: {
+    'train': train,
+    'val': val,
+    'test': test
+}
+
+USE_DETECTION: False
+
+FOV_POINTS_ONLY: True
+
+# DATA_AUGMENTOR:
+#     DISABLE_AUG_LIST: ['placeholder']
+#     AUG_CONFIG_LIST:
+#         - NAME: random_world_flip
+#           ALONG_AXIS_LIST: ['x']
+
+#         - NAME: random_world_scaling
+#           WORLD_SCALE_RANGE: [0.95, 1.05]
+
+
+POINT_FEATURE_ENCODING: {
+    encoding_type: absolute_coordinates_encoding,
+    used_feature_list: ['x', 'y', 'z', 'intensity'],
+    src_feature_list: ['x', 'y', 'z', 'intensity'],
+}
+
+
+DATA_PROCESSOR:
+    - NAME: shuffle_points
+      SHUFFLE_ENABLED: {
+        'train': True,
+        'test': False
+      }
+    
+    - NAME: sample_points
+      NUM_POINTS: {
+        'search': 512,
+        'template': 512
+      }
+
+    - NAME: transform_points_to_voxels
+      # VOXEL_SIZE: [0.05, 0.05, 0.1]
+      VOXEL_SIZE: [0.025, 0.025, 0.05]
+      MAX_POINTS_PER_VOXEL: 5
+      MAX_NUMBER_OF_VOXELS: {
+        'train': 512,
+        'test': 1024
+      }
