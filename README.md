@@ -19,7 +19,7 @@ Feature fusion and similarity computation are two core problems in 3D object tra
 
 ## Performance
 
-Here, we show the latest performance of our LTTR. In order to better open source our code, we reconstruct the code and optimized some parameters compared to the version in the paper. The performances after code reconstruction are as follows:
+Here, we show the latest performance of our LTTR. In order to better open source our code, we reconstruct the code and optimized some parameters compared to the version in the paper, and the performances are as follows:
 
 ### Kitti Dataset
 
@@ -114,9 +114,5 @@ If you find the project useful for your research, you may cite,
     pages     = {317},
     publisher = {{BMVA} Press},
     year      = {2021},
-    url       = {https://www.bmvc2021-virtualconference.com/assets/papers/1445.pdf},
-    timestamp = {Wed, 22 Jun 2022 16:52:45 +0200},
-    biburl    = {https://dblp.org/rec/conf/bmvc/Cui0SGZ21.bib},
-    bibsource = {dblp computer science bibliography, https://dblp.org}
     }
 ```

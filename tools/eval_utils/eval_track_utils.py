@@ -27,7 +27,6 @@ def eval_track_one_epoch(cfg, model, dataloader, epoch_id, logger, dist_test=Fal
             ov = first_index[f_index+1]
         
         first_point = dataset[st+1]['template_voxels']
-        template_box = dataset[st]['template_gt_box'].reshape(7)
         
         length = ov - st - 1
         
@@ -41,8 +40,6 @@ def eval_track_one_epoch(cfg, model, dataloader, epoch_id, logger, dist_test=Fal
                     Precision_main.add_accuracy(torch.zeros(1).cuda())
 
                 batch_dict = dataset.collate_batch([data])
-                template_voxels = batch_dict['template_voxels']
-                search_voxels = batch_dict['search_voxels']
 
                 load_data_to_gpu(batch_dict)
                 gt_box = batch_dict['gt_boxes'].view(-1)[:7]

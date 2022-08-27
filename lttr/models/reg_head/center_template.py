@@ -217,13 +217,12 @@ class CenterHeadTemplate(nn.Module):
 
     def get_track_reg_loss(self):
         loss_weights = self.model_cfg.LOSS_CONFIG.REG_WEIGHTS
-        ind_label = self.forward_ret_dict['ind_labels'] # (B, N)
-        reg_mask = self.forward_ret_dict['reg_mask'] # (B, N)
-        label_value = self.forward_ret_dict['reg_labels'] # (B, N, 5)
-
-        ry_pred = self.forward_ret_dict['ry_preds'] # [B, H, W, 5]
-        z_pred = self.forward_ret_dict['z_preds'] # [B, H, W, 5]
-        xy_pred = self.forward_ret_dict['xy_preds'] # [B, H, W, 5]
+        ind_label = self.forward_ret_dict['ind_labels']
+        reg_mask = self.forward_ret_dict['reg_mask']
+        label_value = self.forward_ret_dict['reg_labels']
+        ry_pred = self.forward_ret_dict['ry_preds']
+        z_pred = self.forward_ret_dict['z_preds']
+        xy_pred = self.forward_ret_dict['xy_preds']
         reg_pred = torch.cat((xy_pred, z_pred, ry_pred),dim=-1)
 
         pred_value = self.transpose_and_gather_feat(reg_pred, ind_label)

@@ -21,17 +21,6 @@ class CenterHead(CenterHeadTemplate):
         nn.init.normal_(self.ry_layers[-1].weight, mean=0, std=0.001)
 
     def assign_targets(self, input_dict):
-        """
-        Args:
-            input_dict:
-                point_features: (N1 + N2 + N3 + ..., C)
-                batch_size:
-                point_coords: (N1 + N2 + N3 + ..., 4) [bs_idx, x, y, z]
-                gt_boxes (optional): (B, M, 8)
-        Returns:
-            point_cls_labels: (N1 + N2 + N3 + ...), long type, 0:background, -1:ignored
-            point_part_labels: (N1 + N2 + N3 + ..., 3)
-        """
         gt_boxes = input_dict['gt_boxes']
         assert gt_boxes.shape.__len__() == 3, 'gt_boxes.shape=%s' % str(gt_boxes.shape)
 
